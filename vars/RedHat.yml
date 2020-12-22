@@ -23,9 +23,9 @@ yum_repository: []
 #    gpgkey: "https://my-repo-key.url"
 #    gpgcheck: "yes"
 
-install_epel_repo: true  # or 'false' (installed from the package "epel-release-latest.noarch.rpm")
-install_postgresql_repo: true  # or 'false' (installed from the package "pgdg-redhat-repo-latest.noarch.rpm")
-install_scl_repo: true  # or 'false' (Redhat 7 family only)
+install_epel_repo: false  # or 'false' (installed from the package "epel-release-latest.noarch.rpm")
+install_postgresql_repo: false  # or 'false' (installed from the package "pgdg-redhat-repo-latest.noarch.rpm")
+install_scl_repo: false  # or 'false' (Redhat 7 family only)
 
 # Packages (for yum repo)
 os_specific_packages:

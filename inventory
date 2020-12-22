@@ -7,25 +7,25 @@
 
 # if dcs_exists: false and dcs_type: "etcd" (in vars/main.yml)
 [etcd_cluster]  # recommendation: 3 or 5-7 nodes
-10.128.64.140
-10.128.64.142
-10.128.64.143
+192.168.21.61
+192.168.21.62
+192.168.21.63
 
 
 # if with_haproxy_load_balancing: true (in vars/main.yml)
-[balancers]
-10.128.64.140
-10.128.64.142
-10.128.64.143
+#[balancers]
+#10.128.64.140
+#10.128.64.142
+#10.128.64.143
 
 
 # PostgreSQL nodes
 [master]
-10.128.64.140 hostname=pgnode01 postgresql_exists='false'
+192.168.21.61 hostname=pgnode01 postgresql_exists='false'
 
 [replica]
-10.128.64.142 hostname=pgnode02
-10.128.64.143 hostname=pgnode03
+192.168.21.62 hostname=pgnode02
+192.168.21.63 hostname=pgnode03
 
 [postgres_cluster:children]
 master
@@ -45,11 +45,11 @@ replica
 ansible_connection='ssh'
 ansible_ssh_port='22'
 ansible_user='root'
-ansible_ssh_pass='secretpassword'  # "sshpass" package is required for use "ansible_ssh_pass"
+#ansible_ssh_pass='secretpassword'  # "sshpass" package is required for use "ansible_ssh_pass"
 # ansible_ssh_private_key_file=
 # ansible_python_interpreter='/usr/bin/python3'  # is required for use python3
 
 [pgbackrest:vars]
 ansible_user='postgres'
-ansible_ssh_pass='secretpassword'
+ansible_ssh_pass='qwertyuiop'
 

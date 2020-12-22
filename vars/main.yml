@@ -10,18 +10,18 @@ proxy_env: {}
 # -------------------------------------------
 
 # Cluster variables
-cluster_vip: ""  # ip address for client access to databases in the cluster (optional)
+cluster_vip: "192.168.21.69"  # ip address for client access to databases in the cluster (optional)
 vip_interface: "{{ ansible_default_ipv4.interface }}"  # interface name (ex. "ens32")
 
-patroni_cluster_name: "postgres-cluster"  # specify the cluster name
+patroni_cluster_name: "postgres-vbox"  # specify the cluster name
 patroni_install_version: "latest"  # or specific version (example 1.5.6)
 
 patroni_superuser_username: "postgres"
-patroni_superuser_password: "postgres-pass"  # please change password
+patroni_superuser_password: "qwertyuiop"  # please change password
 patroni_replication_username: "replicator"
-patroni_replication_password: "replicator-pass"  # please change password
+patroni_replication_password: "qwertyuiop"  # please change password
 
-synchronous_mode: false  # or 'true' for enable synchronous database replication
+synchronous_mode: true  # or 'true' for enable synchronous database replication
 synchronous_mode_strict: false  # if 'true' then block all client writes to the master, when a synchronous replica is not available
 synchronous_node_count: 1  # number of synchronous standby databases
 
@@ -102,7 +102,7 @@ postgresql_parameters:
   - {option: "shared_buffers", value: "512MB"}  # please change this value
   - {option: "work_mem", value: "128MB"}  # please change this value
   - {option: "maintenance_work_mem", value: "256MB"}  # please change this value
-  - {option: "effective_cache_size", value: "4GB"}  # please change this value
+  - {option: "effective_cache_size", value: "1GB"}  # please change this value
   - {option: "checkpoint_timeout", value: "15min"}
   - {option: "checkpoint_completion_target", value: "0.9"}
   - {option: "min_wal_size", value: "2GB"}  # for PostgreSQL 9.5 and above (for 9.4 use "checkpoint_segments")
@@ -176,6 +176,7 @@ postgresql_pg_hba:
   - {type: "local", database: "all", user: "all", address: "", method: "peer"}
   - {type: "host", database: "all", user: "all", address: "127.0.0.1/32", method: "md5"}
   - {type: "host", database: "all", user: "all", address: "::1/128", method: "md5"}
+  - {type: "host", database: "all", user: "all", address: "0.0.0.0/0", method: "md5"}
 #  - {type: "host", database: "mydatabase", user: "mydb-user", address: "192.168.0.0/24", method: "md5"}
 #  - {type: "host", database: "all", user: "all", address: "192.168.0.0/24", method: "ident", options: "map=main"}  # use pg_ident
 
@@ -186,7 +187,7 @@ postgresql_pg_ident: []
 
 
 # PgBouncer parameters
-pgbouncer_install: true  # or 'false' if you do not want to install and configure the pgbouncer service
+pgbouncer_install: false  # or 'false' if you do not want to install and configure the pgbouncer service
 pgbouncer_conf_dir: "/etc/pgbouncer"
 pgbouncer_log_dir: "/var/log/pgbouncer"
 pgbouncer_listen_port: 6432
@@ -213,11 +214,11 @@ patroni_master_start_timeout: 300
 patroni_postgresql_use_pg_rewind: true  # or 'false'
 # try to use pg_rewind on the former leader when it joins cluster as a replica.
 
-patroni_remove_data_directory_on_rewind_failure: false  # or 'true' (if use_pg_rewind: 'true')
+patroni_remove_data_directory_on_rewind_failure: true  # or 'true' (if use_pg_rewind: 'true')
 # avoid removing the data directory on an unsuccessful rewind
 # if 'true', Patroni will remove the PostgreSQL data directory and recreate the replica.
 
-patroni_remove_data_directory_on_diverged_timelines: false  # or 'true'
+patroni_remove_data_directory_on_diverged_timelines: true  # or 'true'
 # if 'true', Patroni will remove the PostgreSQL data directory and recreate the replica
 # if it notices that timelines are diverging and the former master can not start streaming from the new master.
 
