@@ -7,9 +7,9 @@
 
 # if dcs_exists: false and dcs_type: "etcd" (in vars/main.yml)
 [etcd_cluster]  # recommendation: 3 or 5-7 nodes
-192.168.21.61
-192.168.21.62
-192.168.21.63
+192.168.21.70
+192.168.21.72
+192.168.21.64
 
 
 # if with_haproxy_load_balancing: true (in vars/main.yml)
