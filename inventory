@@ -24,8 +24,9 @@
 192.168.21.61 hostname=pgnode01 postgresql_exists='false'
 
 [replica]
-192.168.21.62 hostname=pgnode02
-192.168.21.63 hostname=pgnode03
+#192.168.21.62 hostname=pgnode02
+#192.168.21.63 hostname=pgnode03
+192.168.21.65 hostname=pgnode05
 
 [postgres_cluster:children]
 master
